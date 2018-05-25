@@ -1,0 +1,85 @@
+#dataHandleTool {
+    .tool {
+        height: 100%;
+        position: relative;
+        box-sizing: border-box;
+        .el-tree {
+            position: absolute;
+            top: 0;
+            bottom: 10px;
+            left: 5px;
+            right: 0;
+            overflow: auto;
+            border: none;
+        }
+    }
+    .program {
+        padding: 15px 25px 15px 25px;
+        float: left;
+        min-width: 380px;
+        .program-title {
+            font-size: 20px;
+        }
+        .program-content {
+            position: absolute;
+            top: 105px;
+            bottom: 25px;
+            left: 25px;
+            right: 10px;
+            padding-right: 15px;
+            overflow: auto;
+            .primary {
+                text-align: center;
+                margin-top: 15px;
+            }
+        }
+    }
+    .help-box {
+        p {
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .help {
+            padding: 0 15px 0 15px;
+            font-size: 15px;
+            line-height: 35px;
+            text-align: justify;
+        }
+    }
+    
+    .el-dialog__body{
+        padding:15px;
+    }
+    .program-list{
+        padding: 0;
+        margin:0;
+        li{
+            list-style: none;
+            padding:8px 5px;
+            font-size: 14px;
+            cursor: pointer;
+            &:hover{
+                background-color: #F1F1F1;
+            }
+        }
+    }
+}
+
+#toolKitlList{
+    .el-tabs__content{
+        position: relative;
+        top:0;
+    }
+}
+
+.dialog-box{
+    height: 250px;
+    overflow: auto;
+}
+.el-tree {
+    border: none;
+}
+.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content{
+    background-color: #dfe6ec;
+}

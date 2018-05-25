@@ -1,0 +1,94 @@
+#home {
+  padding: 15px;
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  bottom: 30px;
+  box-sizing: border-box;
+  .flex-container {
+    box-sizing: border-box;
+    padding-bottom: 30px;
+  }
+  .el-row {
+    // padding-bottom: 4%;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .bg-purple-dark {
+    background: #99a9bf;
+  }
+  .bg-purple {
+    background: #d3dce6;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+  .grid-content {
+    border-radius: 3px;
+    min-height: 36px;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px solid #D4D4D4;
+    position: relative;
+    .title {
+      height: 26px;
+      line-height: 26px;
+      background-color: #F2F2F2;
+      padding: 5px;
+      padding-left: 10px;
+      color: #777;
+      border-bottom: 1px solid #D4D4D4;
+      font-size: 14px;
+      .more-btn {
+        float: right;
+        font-size: 12px;
+        cursor: pointer;
+        margin-right: 10px;
+        &:hover {
+          color: #1e88e5;
+          text-decoration: underline;
+        }
+      }
+
+    }
+    .content {
+      position: absolute;
+      width: 100%;
+      top: 37px;
+      bottom: 0px;
+      overflow: auto;
+    }
+  }
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+  }
+}
+
+#trendAnalysis {
+  .title {
+    height: 26px;
+    line-height: 26px;
+    background-color: rgba(255, 255, 255, 0);
+    padding: 5px;
+    padding-left: 10px;
+    color: #49a6ee;
+    font-size: 14px;
+    .more-btn {
+      float: right;
+      font-size: 12px;
+      cursor: pointer;
+      margin-right: 10px;
+      &:hover {
+        color: #1e88e5;
+        text-decoration: underline;
+      }
+    }
+
+  }
+}
