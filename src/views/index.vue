@@ -27,6 +27,7 @@
         </el-menu-item>
       </el-menu>
     </div>
+      <div class="right-pane">
       <el-tabs v-model="activeName" type="card"closable @tab-remove="removeTab">
         <el-tab-pane
           :key="item.name"
@@ -37,6 +38,7 @@
           {{item.content}}
         </el-tab-pane>
       </el-tabs>
+      </div>
     </div>
   </div>
 
