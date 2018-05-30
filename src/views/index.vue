@@ -20,7 +20,7 @@
     <div class="content-box">
     <div class="nav">
       <div class="collapse-btn" @click="taggleNav()"></div>
-      <el-menu class="el-menu-vertical-demo"  unique-opened>
+      <el-menu class="el-menu-vertical-demo"  unique-opened  :collapse="isCollapse">
         <el-menu-item v-for="(item,index) of items" :index="item.name" :key="index" @click="addTab(item)">
           <i class="el-icon-menu"></i>
           <span slot="title">{{item.name}}</span>
@@ -59,10 +59,18 @@
         }],
         activeName:'1',
         tabIndex: 0,
-        userName:'周冬雨'
+        userName:'周冬雨',
+        isCollapse: false,
       }
     },
     methods : {
+      taggleNav: function () {
+        if (this.isCollapse == false) {
+          this.isCollapse = true
+        } else {
+          this.isCollapse = false;
+        }
+      },
       addTab(item) {
           let newTabName = ++this.tabIndex + '';
           this.menuList.push({
