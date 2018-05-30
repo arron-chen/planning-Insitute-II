@@ -16,6 +16,14 @@
           </el-dropdown-menu>
         </el-dropdown>
       </div>
+      <div class="header-nav" >
+        <div class="nav-list">
+          <div v-for="(item,index) in menuList">
+            <img class="navImg" src="../assets/image/menu1.png" />
+            {{item.name}}
+          </div>
+        </div>
+      </div>
     </div>
     <div class="content-box">
     <div class="nav">
@@ -60,7 +68,8 @@
           "name": "业务设置",
           "pageUrl": null,
           "imageUrl": "/mainWeb/images/mobile/系统设置/symset.png",
-          "children": [{
+          "children": [
+            {
             "moduleId": "1eda0594-4b90-4363-80ea-137b9a8199b0",
             "name": "业务详情设置",
             "pageUrl": "/pubWeb/system/getMatterDeclareSetting",
@@ -88,7 +97,11 @@
             "sort": 0,
             "position": 100
           }]
-          }]
+          },
+          {"moduleId": "20ddfe2c-096d-492e-ae02-140e1a77aaf8",
+            "name": "业务设置1",
+            "pageUrl": null,
+            "imageUrl": "/mainWeb/images/mobile/系统设置/symset.png",}]
           }
           ],
         activeName:'1',
@@ -151,5 +164,19 @@
     },
   }
 </script>
-
+<style scoped>
+  .header-nav>.nav-list{
+    padding: 10px 0;height: 55px;color:#fff;
+  }
+  .header-nav>.nav-list>div{
+    display: inline-block;padding: 0 10px;
+  }
+  .navImg{
+    margin-top: -3px;
+    width: 35px;
+    height: 35px;
+    display: block;
+    margin: 0 auto 2px;
+  }
+</style>
 
