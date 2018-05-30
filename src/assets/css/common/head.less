@@ -1,0 +1,150 @@
+#header {
+    &.header {
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 75px;
+        background-color: #1e88e5;
+        box-shadow: 0 2px 1px #4986e3;
+        -webkit-box-shadow: 0 2px 1px #4986e3;
+        -moz-box-shadow: 0 2px 1px #4986e3;
+        overflow: hidden;
+        .logo {
+            display: inline-block;
+            font-size: 25px;
+            line-height:75px;
+            color: #fff;
+            padding-left: 85px;
+            //background-image: url(../../image/logo.png);
+            background-repeat: no-repeat;
+            background-size: 65px;
+            background-position: 15px;
+            font-family: 'Adobe 黑体 Std';
+        }
+        .header-nav {
+            display: inline-block;
+            float: right;
+            height: 75px; // line-height: 85px;
+            margin: 0;
+            margin-right: 10px;
+            #content {
+                padding:10px 0;
+                height: 55px;
+                .el-tabs__active-bar {
+                    display: none;
+                }
+                &>.el-tabs__header {
+                    border-bottom: none;
+                    .el-tabs__item {
+                        padding: 0px 5px;
+                    }
+                }
+                .header-nav-item {
+                    width: 60px;
+                    padding: 2px;
+
+                    img {
+                        margin-top: -3px;
+                        width: 35px;
+                        height: 35px;
+                        display: block;
+                        margin:0 auto 2px auto;
+                        // margin-bottom: -18px;
+                    }
+                    p{
+                        text-align: center;
+                        color: #fff;
+                        font-size: 15px;
+                        line-height: 1;
+                        margin:0;
+                    }
+                    .header-nav-name {
+
+                    }
+                }
+                .is-active {
+                    .header-nav-item {
+                        background-color: #4ba0ea;
+                    }
+                }
+            }
+            a {
+                // float: left;
+                // color: #fff;
+                // display: inline-block;
+                // height: 78px;
+                // width: 80px; // line-height: 125px;
+                // margin-top: 4px;
+                // font-size: 16px;
+                // text-align: center;
+                // text-decoration: none;
+                // margin-right: 2px;
+                // background-repeat: no-repeat;
+                // background-size: 40px;
+                // background-position: 20px 8px;
+                // position: relative;
+                img {
+                    position: absolute;
+                    top: 6px;
+                    left: 22px;
+                    height: 40px;
+                }
+                // &:hover {
+                //     background-color: #4ba0ea;
+                // }
+            }
+        }
+        .login {
+            float: right;
+            display: inline-block;
+            height: 75px;
+            margin-top: 10px;
+            .userimg {
+                height: 30px;
+                width: 30px;
+                border-radius: 100%;
+                display: block;
+                border: 2px solid #fff;
+                margin: 0 auto;
+            }
+            .username {
+                color: #bfcbd9;
+                font-size: 14px;
+                color: #fff;
+                cursor: pointer;
+                display: block;
+                margin-top: 5px;
+                position: relative;
+                padding-right: 15px;
+                padding-left: 12px;
+                i {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
+
+
+//头部tab切换
+#content {
+    &>.el-tabs__content {
+        position: absolute;
+        top: 78px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+    }
+    &>.el-tabs__header{
+        margin:0;
+    }
+    .content-box{
+        position: absolute;
+        width: 100%;
+        bottom: 30px;
+        top: 0;
+    }
+    .el-tabs__nav-wrap::after{
+        height: 0px;
+    }
+}
