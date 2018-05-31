@@ -44,7 +44,7 @@
           :name="item.moduleId"
           :ref="item.moduleId"
         >
-          <!--<slot ><tab-cont :moduleId="item.moduleId" :iframeWidth="iframeWidth" :splitWidth="splitWidth" :ishowScreen="ishowScreen" :iframURL="item.pageUrl"></tab-cont></slot>-->
+          <slot ><tab-cont :moduleId="item.moduleId" :iframeWidth="iframeWidth" :splitWidth="splitWidth" :ishowScreen="ishowScreen" :iframURL="item.pageUrl"></tab-cont></slot>
         </el-tab-pane>
       </el-tabs>
       </div>
@@ -145,6 +145,7 @@
       window.showPage = _this.switchTab; //切换显示指定标签页
       window.setTabName = _this.setTabName; //设置标签页的title
       window.getCurPage = _this.getCurPage; //获得当前显示页的操作对象
+      window.findTapWindow = function(){ return _this.findTapWindow(_this.activeModuleId)}; //查找当前模块窗口对象
       window.splitScreen = _this.splitScreen; //分栏操作
       window.splitscreenIsOpen=_this.splitscreenIsOpen;
       window.loadScreenContent=_this.loadScreenContent;
@@ -241,7 +242,14 @@
         }
         return rs;
       },
-
+      findTapWindow(moduleId){
+        if(moduleId) {
+          let wapper = this.$refs[moduleId][0].$el || null;
+          if (wapper) {
+            return wapper.getElementsByTagName('iframe')[0].contentWindow || null;
+          }
+        }
+      },
       /**
        * @returns {
        *      container:标签页的jquery对象，以li为根节点。
