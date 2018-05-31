@@ -44,7 +44,13 @@
           :name="item.moduleId"
           :ref="item.moduleId"
         >
-          <slot ><tab-cont :moduleId="item.moduleId" :iframeWidth="iframeWidth" :splitWidth="splitWidth" :ishowScreen="ishowScreen" :iframURL="item.pageUrl"></tab-cont></slot>
+          <slot ><tab-cont :moduleId="item.moduleId"
+                           :iframeWidth="iframeWidth"
+                           :splitWidth="splitWidth"
+                           :ishowScreen="ishowScreen"
+                           :iframURL="item.pageUrl"
+                           :splitCont="splitCont"
+          ></tab-cont></slot>
         </el-tab-pane>
       </el-tabs>
       </div>
@@ -116,6 +122,8 @@
         ishowScreen:true,
         iframeWidth:'100%',
         splitWidth:'',
+        splitCont:'',
+        splitURL:'',
       }
     },
     components:{tabCont},
@@ -179,7 +187,6 @@
             // content: '<ifarme src="'+item.pageUrl+'"></ifarme>'
             content:`
 
-
             `
 
           });
@@ -227,8 +234,13 @@
         }
       },
       splitscreenIsOpen(){},
-      loadScreenContent(){},
-      loadScreenUrl(){},
+      loadScreenContent(html){
+          this.splitCont=html;
+      },
+      loadScreenUrl(url,pageId){
+        var html =`<iframe class="splitIframe" src=${url} style="width:100%;height:100%;"></iframe>`;
+        this.splitCont=html;
+      },
 
 	    getTabName(moduleId){
         let rs = null;
@@ -275,7 +287,7 @@
     }
   }
 </script>
-<style scoped>
+<style >
   .header-nav>.nav-list{
     padding: 10px 0;height: 55px;color:#fff;
   }
@@ -307,7 +319,8 @@
     top:0;bottom:0;
     right:0;
     width:0%;
-    height:100%;overflow:hidden;cursor:default;font-size:14px;background: #1e88e5;
+    height:100%;overflow:hidden;cursor:default;font-size:14px;
+    border:1px solid #efefef;
     transition:all linear .7s;
   }
 
