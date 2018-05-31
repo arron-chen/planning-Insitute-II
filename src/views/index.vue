@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="content-box">
-    <div class="nav">
+    <div class="nav" v-if="secondMenu.length>0">
       <div class="collapse-btn" @click="taggleNav()"></div>
       <el-menu class="el-menu-vertical-demo"  unique-opened  :collapse="isCollapse">
         <el-menu-item v-for="(item,index) of secondMenu" :index="item.moduleId" :key="index" @click="addTab(item)">
@@ -126,6 +126,7 @@
             return this.menuList[i].children;
           }
         }
+        return [];
       }
     },
     created() {
@@ -198,6 +199,38 @@
             }
           });
         }
+      },
+      getTabName(moduleId){
+        if(moduleId){
+          let tabs = this.tabsList;
+          tabs.forEach((tab, index) => {
+            if (tab.moduleId == moduleId) {
+              return tab.title;
+            }
+          });
+        }
+        return null;
+      },
+
+      /**
+       * @returns {
+       *      container:标签页的jquery对象，以li为根节点。
+       *      getModId,获得当前模块ID
+       *      getTitle,获得当前模块标题
+       *      setTitle,设置当前模块标题}
+       */
+      getCurPage(){
+        let _this = this;
+        let rs = null;
+        if(_this.activeModuleId){
+          rs = {
+            container: '',
+            getModId: function(){return _this.activeModuleId},
+            setTitle: function(name){_this.setTabName(_this.activeModuleId,name);},
+            getTitle: _this.getTabName(_this.activeModuleId)
+          }
+        }
+        return rs;
       }
     },
   }
