@@ -36,12 +36,12 @@
       </el-menu>
     </div>
       <div class="right-pane">
-      <el-tabs v-model="activeName" type="card"closable @tab-remove="removeTab">
+      <el-tabs v-model="activeModuleId" type="card"closable @tab-remove="removeTab">
         <el-tab-pane
-          :key="item.name"
+          :key="item.moduleId"
           v-for="(item, index) in tabsList"
           :label="item.title"
-          :name="item.name"
+          :name="item.moduleId"
         >
           <div v-html="item.content"></div>
           <!--{{item.content}}-->
@@ -105,7 +105,7 @@
             "imageUrl": "/mainWeb/images/mobile/系统设置/symset.png",}]
           }
           ],
-        activeName:'1',
+        activeModuleId:'1',
         tabIndex: 0,
         userName:'周冬雨',
         isCollapse: false,
@@ -142,34 +142,43 @@
         }
       },
       addTab(item) {
+        console.log(item.moduleId);
         //if(item.moduleId || item.name || item.pageUrl){return;}
-        let newTabName = ++this.tabIndex + '';
-        this.tabsList.push({
-          moduleId: item.moduleId,
-          pageUrl: item.pageUrl,
-          title: item.name,
-          name: newTabName,
-          // content: '<ifarme src="'+item.pageUrl+'"></ifarme>'
-          content:'<div style="color: #1e88e5">123123</div>'
-        });
-        this.activeName = item.name;
-      },
-      removeTab(targetName) {
         let tabs = this.tabsList;
-        let activeName = this.activeName;
-        if (activeName === targetName) {
+        let flag = true;
+        tabs.forEach((tab, index) => {
+          if (tab.moduleId == item.moduleId) {
+            flag = false;
+          }
+        });
+        if(flag) {
+          let newTabName = ++this.tabIndex + '';
+          this.tabsList.push({
+            moduleId: item.moduleId,
+            pageUrl: item.pageUrl,
+            title: item.name,
+            name: newTabName,
+            // content: '<ifarme src="'+item.pageUrl+'"></ifarme>'
+            content: '<div style="color: #1e88e5">123123</div>'
+          });
+          this.activeModuleId = item.moduleId;
+        }
+      },
+      removeTab(moduleId) {
+        let tabs = this.tabsList;
+        let activeModuleId = this.activeModuleId;
+        if (activeModuleId === moduleId) {
           tabs.forEach((tab, index) => {
-            if (tab.name === targetName) {
+            if (tab.moduleId === moduleId) {
               let nextTab = tabs[index + 1] || tabs[index - 1];
               if (nextTab) {
-                activeName = nextTab.name;
+                activeModuleId = nextTab.moduleId;
               }
             }
           });
         }
-
-        this.editableTabsValue2 = activeName;
-        this.editableTabs2 = tabs.filter(tab => tab.name !== targetName);
+        this.activeModuleId = activeModuleId;
+        this.tabsList = tabs.filter(tab => tab.moduleId !== moduleId);
       }
     },
   }
