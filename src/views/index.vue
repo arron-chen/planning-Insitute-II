@@ -43,7 +43,8 @@
           :label="item.title"
           :name="item.name"
         >
-          {{item.content}}
+          <div v-html="item.content"></div>
+          <!--{{item.content}}-->
         </el-tab-pane>
       </el-tabs>
       </div>
@@ -141,13 +142,17 @@
         }
       },
       addTab(item) {
-          let newTabName = ++this.tabIndex + '';
-          this.tabsList.push({
-            title: item.name,
-            name: newTabName,
-            content: 'New Tab content'
-          });
-          this.activeName = item.name;
+        //if(item.moduleId || item.name || item.pageUrl){return;}
+        let newTabName = ++this.tabIndex + '';
+        this.tabsList.push({
+          moduleId: item.moduleId,
+          pageUrl: item.pageUrl,
+          title: item.name,
+          name: newTabName,
+          // content: '<ifarme src="'+item.pageUrl+'"></ifarme>'
+          content:'<div style="color: #1e88e5">123123</div>'
+        });
+        this.activeName = item.name;
       },
       removeTab(targetName) {
         let tabs = this.tabsList;
