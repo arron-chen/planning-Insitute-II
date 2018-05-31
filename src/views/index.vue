@@ -42,8 +42,9 @@
           v-for="(item, index) in tabsList"
           :label="item.title"
           :name="item.moduleId"
+          :ref="item.moduleId"
         >
-          <slot ><tab-cont :moduleId="item.moduleId" :iframeWidth="iframeWidth" :splitWidth="splitWidth" :ishowScreen="ishowScreen" :iframURL="item.pageUrl"></tab-cont></slot>
+          <!--<slot ><tab-cont :moduleId="item.moduleId" :iframeWidth="iframeWidth" :splitWidth="splitWidth" :ishowScreen="ishowScreen" :iframURL="item.pageUrl"></tab-cont></slot>-->
         </el-tab-pane>
       </el-tabs>
       </div>
@@ -143,8 +144,7 @@
       window.closePage = _this.removeTab; //关闭指定标签页
       window.showPage = _this.switchTab; //切换显示指定标签页
       window.setTabName = _this.setTabName; //设置标签页的title
-
-      window.getCurPage = null; //获得当前显示页的操作对象
+      window.getCurPage = _this.getCurPage; //获得当前显示页的操作对象
       window.splitScreen = _this.splitScreen; //分栏操作
       window.splitscreenIsOpen=_this.splitscreenIsOpen;
       window.loadScreenContent=_this.loadScreenContent;
@@ -159,7 +159,6 @@
         }
       },
       addTab(item) {
-        console.log(item.moduleId);
         //if(item.moduleId || item.name || item.pageUrl){return;}
         let tabs = this.tabsList;
         let flag = true;
@@ -231,15 +230,16 @@
       loadScreenUrl(){},
 
 	    getTabName(moduleId){
+        let rs = null;
         if(moduleId){
           let tabs = this.tabsList;
           tabs.forEach((tab, index) => {
             if (tab.moduleId == moduleId) {
-              return tab.title;
+              rs = tab.title;
             }
           });
         }
-        return null;
+        return rs;
       },
 
       /**
@@ -254,10 +254,10 @@
         let rs = null;
         if(_this.activeModuleId){
           rs = {
-            container: '',
+            container: _this.$refs[_this.activeModuleId][0].$el || null,
             getModId: function(){return _this.activeModuleId},
             setTitle: function(name){_this.setTabName(_this.activeModuleId,name);},
-            getTitle: _this.getTabName(_this.activeModuleId)
+            getTitle: function(){return _this.getTabName(_this.activeModuleId)}
           }
         }
         return rs;
