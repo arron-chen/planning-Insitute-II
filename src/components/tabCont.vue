@@ -6,9 +6,8 @@
         <div :id='splitID' :style="{width:splitWidth}" v-show="ishowScreen" class="splitscreen">
           <div class="toolsbar">
             <button @click="showScreen(false)">关闭</button>
-            <button @click="showScreen(true)">打开 </button>
           </div>
-          <div class="splitscreencont"></div>
+          <div class="splitscreencont" v-html="splitCont"></div>
         </div>
 
       </div>
@@ -27,6 +26,7 @@
       splitWidth:'',
       ishowScreen:'',
       iframURL:'',
+      splitCont:'',
     },
     computed:{
       mainID(){
@@ -42,12 +42,40 @@
     methods:{
       showScreen(bool){
         window.parent.splitScreen(window.name,bool);
-      }
+      },
+
     },
     mounted(){
 
     }
   }
 </script>
-<style>
+<style scoped lang="less">
+  .splitscreen{
+    .toolsbar{
+      width:100%;
+      height:30px;
+      line-height:30px;
+      min-width:200px;
+      position:absolute;
+      border-bottom:1px solid #efefef;
+      padding:2px 3px;
+      button{
+        height:25px;
+        line-height: 25px;
+        position:relative;
+        left:10px;
+        top:2px;
+      }
+    }
+    .splitscreencont{
+      position:absolute;
+      top:30px;
+      bottom:0;
+      left:0;right:0;
+      background: #1e88e5;
+
+    }
+
+  }
 </style>

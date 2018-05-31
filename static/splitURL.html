@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SPLIT</title>
+  <style>
+    html,body{
+      width:100%;
+      height:100%;
+      margin:0;padding:0;
+      min-width:200px;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="split(true)">分屏</button>
+  <button onclick="split(false)">guan屏</button>
+  <button onclick="insertCont()">插入html内容</button>
+  <button onclick="insertIframe()">插入iframe内容</button>
+</body>
+<script>
+  window.onload=function(){
+     /* split();*/
+  };
+  function  split(bool){
+    window.parent.splitScreen(window.name,bool);
+  }
+  function insertCont(){
+    var html = `<a>111</a>`;
+    window.parent.loadScreenContent(html);
+  }
+  function insertIframe(){
+    var iframURL='../../static/splitURL.html';
+    window.parent.loadScreenUrl(iframURL);
+  }
+</script>
+</html>
