@@ -43,8 +43,7 @@
           :label="item.title"
           :name="item.moduleId"
         >
-          <div v-html="item.content"></div>
-          <!--{{item.content}}-->
+          <slot ><tab-cont :moduleId="item.moduleId" :iframeWidth="iframeWidth" :splitWidth="splitWidth" :ishowScreen="ishowScreen" :iframURL="item.pageUrl"></tab-cont></slot>
         </el-tab-pane>
       </el-tabs>
       </div>
@@ -53,6 +52,7 @@
 
 </template>
 <script>
+  import tabCont from '@/components/tabCont';
   export default {
     data(){
       return {
@@ -62,7 +62,8 @@
         items1:[
           {"moduleId": null,
             "name": null,
-            "pageUrl": null,
+
+            "pageUrl": '../../static/test.html',
             "imageUrl": null,
             "children": [
           {"moduleId": "20ddfe2c-096d-492e-ae02-140e1a77aaf8",
@@ -73,7 +74,8 @@
             {
             "moduleId": "1eda0594-4b90-4363-80ea-137b9a8199b0",
             "name": "业务详情设置",
-            "pageUrl": "/pubWeb/system/getMatterDeclareSetting",
+
+            "pageUrl": '../../static/test.html',
             "imageUrl": null,
             "children": null,
             "parentId": "20ddfe2c-096d-492e-ae02-140e1a77aaf8",
@@ -109,8 +111,13 @@
         tabIndex: 0,
         userName:'周冬雨',
         isCollapse: false,
+
+        ishowScreen:true,
+        iframeWidth:'100%',
+        splitWidth:'',
       }
     },
+    components:{tabCont},
     computed : {
       menuList(){
         // console.log(this.items1);
@@ -136,8 +143,12 @@
       window.closePage = _this.removeTab; //关闭指定标签页
       window.showPage = _this.switchTab; //切换显示指定标签页
       window.setTabName = _this.setTabName; //设置标签页的title
-      window.findTapWindow = null; //查找当前模块窗口对象
+
       window.getCurPage = null; //获得当前显示页的操作对象
+      window.splitScreen = _this.splitScreen; //分栏操作
+      window.splitscreenIsOpen=_this.splitscreenIsOpen;
+      window.loadScreenContent=_this.loadScreenContent;
+      window.loadScreenUrl =_this.loadScreenUrl;
     },
     methods : {
       taggleNav: function () {
@@ -166,7 +177,11 @@
             title: item.name,
             name: newTabName,
             // content: '<ifarme src="'+item.pageUrl+'"></ifarme>'
-            content: item.name
+            content:`
+
+
+            `
+
           });
           this.activeModuleId = item.moduleId;
         }
@@ -200,7 +215,22 @@
           });
         }
       },
-      getTabName(moduleId){
+      splitScreen(pageId,isSplit){
+        if(isSplit==true){
+            this.ishowScreen=true;
+            this.iframeWidth='50%';
+            this.splitWidth="50%";
+        }else{
+          this.ishowScreen=true;
+          this.iframeWidth='100%';
+          this.splitWidth="0";
+        }
+      },
+      splitscreenIsOpen(){},
+      loadScreenContent(){},
+      loadScreenUrl(){},
+
+	    getTabName(moduleId){
         if(moduleId){
           let tabs = this.tabsList;
           tabs.forEach((tab, index) => {
@@ -233,6 +263,8 @@
         return rs;
       }
     },
+    mounted(){
+    }
   }
 </script>
 <style scoped>
@@ -249,5 +281,27 @@
     display: block;
     margin: 0 auto 2px;
   }
+  .list_box{
+    width:100%;height:100%;
+    position:relative;
+  }
+  .iframepage {
+    border: none;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top:0;bottom:0;
+    left:0;
+
+  }
+  .splitscreen{
+    position: absolute;
+    top:0;bottom:0;
+    right:0;
+    width:0%;
+    height:100%;overflow:hidden;cursor:default;font-size:14px;background: #1e88e5;
+    transition:all linear .7s;
+  }
+
 </style>
 
