@@ -131,7 +131,9 @@
     created() {
       let _this = this;
       //这里可放到全局，提供给子 iframe 调用
-      window.addTab =  _this.addTab;
+      window.addTab =  _this.addTab; //打开一个页
+      window.closePage = _this.removeTab; //关闭指定标签页
+      window.showPage = this.switchTab; //切换显示指定标签页
     },
     methods : {
       taggleNav: function () {
@@ -179,6 +181,9 @@
         }
         this.activeModuleId = activeModuleId;
         this.tabsList = tabs.filter(tab => tab.moduleId !== moduleId);
+      },
+      switchTab(moduleId){
+        this.activeModuleId = moduleId;
       }
     },
   }
