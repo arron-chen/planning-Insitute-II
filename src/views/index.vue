@@ -133,7 +133,10 @@
       //这里可放到全局，提供给子 iframe 调用
       window.addTab =  _this.addTab; //打开一个页
       window.closePage = _this.removeTab; //关闭指定标签页
-      window.showPage = this.switchTab; //切换显示指定标签页
+      window.showPage = _this.switchTab; //切换显示指定标签页
+      window.setTabName = _this.setTabName; //设置标签页的title
+      window.findTapWindow = null; //查找当前模块窗口对象
+      window.getCurPage = null; //获得当前显示页的操作对象
     },
     methods : {
       taggleNav: function () {
@@ -144,6 +147,7 @@
         }
       },
       addTab(item) {
+        console.log(item.moduleId);
         //if(item.moduleId || item.name || item.pageUrl){return;}
         let tabs = this.tabsList;
         let flag = true;
@@ -184,6 +188,16 @@
       },
       switchTab(moduleId){
         this.activeModuleId = moduleId;
+      },
+      setTabName(moduleId, name){
+        if(moduleId){
+          let tabs = this.tabsList;
+          tabs.forEach((tab, index) => {
+            if (tab.moduleId == moduleId) {
+              tab.title = name;
+            }
+          });
+        }
       }
     },
   }
