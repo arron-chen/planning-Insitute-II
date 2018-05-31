@@ -142,12 +142,12 @@
         }
       },
       addTab(item) {
-        console.log(item.moduleId);
         //if(item.moduleId || item.name || item.pageUrl){return;}
         let tabs = this.tabsList;
         let flag = true;
         tabs.forEach((tab, index) => {
           if (tab.moduleId == item.moduleId) {
+            this.activeModuleId = item.moduleId;
             flag = false;
           }
         });
@@ -159,7 +159,7 @@
             title: item.name,
             name: newTabName,
             // content: '<ifarme src="'+item.pageUrl+'"></ifarme>'
-            content: '<div style="color: #1e88e5">123123</div>'
+            content: item.name
           });
           this.activeModuleId = item.moduleId;
         }
