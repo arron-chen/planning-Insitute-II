@@ -18,7 +18,7 @@
       </div>
       <div class="header-nav" >
         <div class="nav-list">
-          <div v-for="(item,index) in menuList">
+          <div v-for="(item,index) in menuList" @click="">
             <img class="navImg" src="../assets/image/menu1.png" />
             {{item.name}}
           </div>
@@ -126,6 +126,11 @@
           }
         }
       }
+    },
+    created() {
+      let _this = this;
+      //这里可放到全局，提供给子 iframe 调用
+      window.addTab =  _this.addTab;
     },
     methods : {
       taggleNav: function () {
