@@ -18,7 +18,7 @@
       </div>
       <div class="header-nav" >
         <div class="nav-list">
-          <div v-for="(item,index) in menuList" @click="">
+          <div v-for="(item,index) in menuList" @click="switchMenu(item.moduleId, index)" :class="isActive==index?'is-active':''">
             <img class="navImg" src="../assets/image/menu1.png" />
             {{item.name}}
           </div>
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="content-box">
-    <div class="nav" v-if="secondMenu.length>0">
+    <div class="nav" v-if="secondMenu && secondMenu.length>0">
       <div class="collapse-btn" @click="taggleNav()"></div>
       <el-menu class="el-menu-vertical-demo"  unique-opened  :collapse="isCollapse">
         <el-menu-item v-for="(item,index) of secondMenu" :index="item.moduleId" :key="index" @click="addTab(item)">
@@ -36,21 +36,22 @@
       </el-menu>
     </div>
       <div class="right-pane">
-      <el-tabs v-model="activeModuleId" type="card"closable @tab-remove="removeTab">
+      <el-tabs v-model="activeModuleId" type="card" closable @tab-remove="removeTab">
         <el-tab-pane
           :key="item.moduleId"
           v-for="(item, index) in tabsList"
           :label="item.title"
           :name="item.moduleId"
           :ref="item.moduleId"
+          :data-parent="item.parentId"
         >
-          <slot ><tab-cont :moduleId="item.moduleId"
-                           :iframeWidth="iframeWidth"
-                           :splitWidth="splitWidth"
-                           :ishowScreen="ishowScreen"
-                           :iframURL="item.pageUrl"
-                           :splitCont="splitCont"
-          ></tab-cont></slot>
+          <!--<slot ><tab-cont :moduleId="item.moduleId"-->
+                           <!--:iframeWidth="iframeWidth"-->
+                           <!--:splitWidth="splitWidth"-->
+                           <!--:ishowScreen="ishowScreen"-->
+                           <!--:iframURL="item.pageUrl"-->
+                           <!--:splitCont="splitCont"-->
+          <!--&gt;</tab-cont></slot>-->
         </el-tab-pane>
       </el-tabs>
       </div>
@@ -59,7 +60,7 @@
 
 </template>
 <script>
-  import tabCont from '@/components/tabCont';
+  //import tabCont from '@/components/tabCont';
   export default {
     data(){
       return {
@@ -108,7 +109,7 @@
             "position": 100
           }]
           },
-          {"moduleId": "20ddfe2c-096d-492e-ae02-140e1a77aaf8",
+          {"moduleId": "20ddfe2c-096d-492e-ae02-140e1a77aaf82",
             "name": "业务设置1",
             "pageUrl": null,
             "imageUrl": "/mainWeb/images/mobile/系统设置/symset.png",}]
@@ -118,7 +119,7 @@
         tabIndex: 0,
         userName:'周冬雨',
         isCollapse: false,
-
+        isActive:1,
         ishowScreen:true,
         iframeWidth:'100%',
         splitWidth:'',
@@ -126,7 +127,7 @@
         splitURL:'',
       }
     },
-    components:{tabCont},
+    components:{},
     computed : {
       menuList(){
         // console.log(this.items1);
@@ -136,13 +137,14 @@
         return this.menuList;
       },
       secondMenu(){
-        if(!this.activeMenu){return []}
+        let rs = [];
+        if(!this.activeMenu){return rs;}
         for(var i=0;i<this.menuList.length;i++){
           if(this.activeMenu == this.menuList[i].moduleId){
-            return this.menuList[i].children;
+            rs = this.menuList[i].children;
           }
         }
-        return [];
+        return rs;
       }
     },
     created() {
@@ -160,6 +162,12 @@
       window.loadScreenUrl =_this.loadScreenUrl;
     },
     methods : {
+      switchMenu: function (modulId,index) {
+        console.log(modulId)
+        console.log(index)
+        this.activeMenu = modulId;
+        this.isActive = index;
+      },
       taggleNav: function () {
         if (this.isCollapse == false) {
           this.isCollapse = true
@@ -185,9 +193,7 @@
             title: item.name,
             name: newTabName,
             // content: '<ifarme src="'+item.pageUrl+'"></ifarme>'
-            content:`
-
-            `
+            content:``
 
           });
           this.activeModuleId = item.moduleId;
@@ -292,7 +298,10 @@
     padding: 10px 0;height: 55px;color:#fff;
   }
   .header-nav>.nav-list>div{
-    display: inline-block;padding: 0 10px;
+    display: inline-block;margin: 0 10px;cursor: pointer;
+  }
+  .header-nav>.nav-list>.is-active{
+    background-color: #4ba0ea;
   }
   .navImg{
     margin-top: -3px;
