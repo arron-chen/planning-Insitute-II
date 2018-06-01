@@ -4,7 +4,7 @@
 
       <!--<div class="logo">土地调查数据管理与辅助决策系统</div>-->
       <div class="login">
-        <img class="userimg" src="">
+        <img class="userimg" src="../assets/image/user2.gif">
         <el-dropdown class="username">
                     <span class="el-dropdown-link">
                         {{userName}}
