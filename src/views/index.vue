@@ -36,7 +36,7 @@
       </el-menu>
     </div>
       <div class="right-pane">
-      <el-tabs v-model="activeModuleId" type="card" closable @tab-remove="removeTab">
+      <el-tabs v-if="tabsList" v-model="activeModuleId" type="card" closable @tab-remove="removeTab">
         <el-tab-pane
           :key="item.moduleId"
           v-for="(item, index) in tabsList"
@@ -66,7 +66,7 @@
       return {
         tabsList:[],
         // items:[],
-        activeMenu:'20ddfe2c-096d-492e-ae02-140e1a77aaf8',
+        activeMenu:'',
         items1:[
           {"moduleId": null,
             "name": null,
@@ -119,7 +119,7 @@
         tabIndex: 0,
         userName:'周冬雨',
         isCollapse: false,
-        isActive:1,
+        isActive: -1,
         ishowScreen:true,
         iframeWidth:'100%',
         splitWidth:'',
@@ -163,8 +163,6 @@
     },
     methods : {
       switchMenu: function (modulId,index) {
-        console.log(modulId)
-        console.log(index)
         this.activeMenu = modulId;
         this.isActive = index;
       },
@@ -293,7 +291,7 @@
     }
   }
 </script>
-<style >
+<style>
   .header-nav>.nav-list{
     padding: 10px 0;height: 55px;color:#fff;
   }
