@@ -14,6 +14,8 @@
 <body>
   <button onclick="split(true)">分屏</button>
   <button onclick="split(false)">guan屏</button>
+  <button onclick="insertCont()">插入html内容</button>
+  <button onclick="insertIframe()">插入iframe内容</button>
 </body>
 <script>
   window.onload=function(){
@@ -21,6 +23,14 @@
   };
   function  split(bool){
     window.parent.splitScreen(window.name,bool);
+  }
+  function insertCont(){
+    var html = `<a>111</a>`;
+    window.parent.loadScreenContent(html);
+  }
+  function insertIframe(){
+    var iframURL='../../static/splitURL.html';
+    window.parent.loadScreenUrl(iframURL);
   }
 </script>
 </html>
