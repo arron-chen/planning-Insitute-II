@@ -20,7 +20,6 @@
       }
     },
     props:{
-      cont:{},
       moduleId:'',
       iframeWidth:'',
       splitWidth:'',

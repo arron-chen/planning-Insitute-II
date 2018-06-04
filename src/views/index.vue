@@ -45,13 +45,13 @@
           :ref="item.moduleId"
           :data-parent="item.parentId"
         >
-          <!--<slot ><tab-cont :moduleId="item.moduleId"-->
-                           <!--:iframeWidth="iframeWidth"-->
-                           <!--:splitWidth="splitWidth"-->
-                           <!--:ishowScreen="ishowScreen"-->
-                           <!--:iframURL="item.pageUrl"-->
-                           <!--:splitCont="splitCont"-->
-          <!--&gt;</tab-cont></slot>-->
+          <slot><tab-cont :moduleId="item.moduleId"
+                           :iframeWidth="iframeWidth"
+                           :splitWidth="splitWidth"
+                           :ishowScreen="ishowScreen"
+                           :iframURL="item.pageUrl"
+                           :splitCont="splitCont">
+          </tab-cont></slot>
         </el-tab-pane>
       </el-tabs>
       </div>
@@ -60,7 +60,7 @@
 
 </template>
 <script>
-  //import tabCont from '@/components/tabCont';
+  import tabCont from '@/components/tabCont';
   export default {
     data(){
       return {
@@ -127,7 +127,7 @@
         splitURL:'',
       }
     },
-    components:{},
+    components:{tabCont},
     computed : {
       menuList(){
         // console.log(this.items1);
@@ -327,7 +327,6 @@
     right:0;
     width:0%;
     height:100%;overflow:hidden;cursor:default;font-size:14px;
-    border:1px solid #efefef;
     transition:all linear .7s;
   }
 
